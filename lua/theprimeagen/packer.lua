@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
     use({
@@ -26,7 +26,7 @@ return require('packer').startup(function(use)
     })
 
 
-    use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
+    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use("nvim-treesitter/playground")
     use("theprimeagen/harpoon")
     use("theprimeagen/refactoring.nvim")
@@ -39,21 +39,21 @@ return require('packer').startup(function(use)
         branch = 'v1.x',
         requires = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'saadparwaiz1/cmp_luasnip'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'hrsh7th/cmp-nvim-lua'},
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},
-            {'rafamadriz/friendly-snippets'},
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
         }
     }
 
@@ -74,9 +74,53 @@ return require('packer').startup(function(use)
         tag = "v3.*",
         requires = 'nvim-tree/nvim-web-devicons'
     }
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
-    end}
+    end }
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
+    })
+    use {
+        'lewis6991/gitsigns.nvim',
+        -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+    use {
+        "ray-x/lsp_signature.nvim",
+    }
+    use 'nvim-tree/nvim-web-devicons'
+    use {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
+    use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+    use "lukas-reineke/indent-blankline.nvim"
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
@@ -85,4 +129,3 @@ return require('packer').startup(function(use)
         end
     })
 end)
-
