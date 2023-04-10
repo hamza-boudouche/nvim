@@ -77,6 +77,22 @@ vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
     { silent = true, noremap = true }
 )
 
+require('bufferline').setup {
+    options = {
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = "File Explorer",
+                padding = 1,
+                text_align = "center",
+                separator = true
+            }
+        },
+    }
+}
+
+vim.cmd('set laststatus=3')
+
 vim.opt.termguicolors = true
 
 require 'nvim-web-devicons'.setup {}
@@ -87,15 +103,4 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
-require('bufferline').setup {
-    options = {
-        offsets = {
-            {
-                filetype = "NvimTree",
-                text = "File Explorer",
-                text_align = "center",
-                separator = true
-            }
-        },
-    }
-}
+

@@ -102,6 +102,7 @@ return require('packer').startup(function(use)
         "ray-x/lsp_signature.nvim",
     }
     use 'nvim-tree/nvim-web-devicons'
+    use 'tiagofumo/vim-nerdtree-syntax-highlight'
     use {
         "folke/trouble.nvim",
         requires = "nvim-tree/nvim-web-devicons",
@@ -113,12 +114,24 @@ return require('packer').startup(function(use)
             }
         end
     }
-    use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
+    use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
     use {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
         end
+    }
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup {
+                log_level = "error"
+            }
+        end
+    }
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
     use "lukas-reineke/indent-blankline.nvim"
     use({
