@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -22,10 +21,10 @@ end)
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -46,14 +45,26 @@ vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/the
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("w")
-    vim.cmd("!chmod +x \"%\"")
-    print(vim.bo.filetype)
+    vim.cmd("wa")
     local type = vim.bo.filetype
-    if type == "lua" then vim.cmd("source")
-    elseif type == "md" then vim.cmd("MarkdownPreview")
-    else vim.cmd("!\"%\"")
+    print(type)
+    if type == "lua" then
+        vim.cmd("!chmod +x \"%\"")
+        vim.cmd("source")
+    elseif type == "md" then
+        vim.cmd("MarkdownPreview")
+    elseif type == "rust" then
+        local Terminal = require('toggleterm.terminal').Terminal
+        function _cargorun_toggle()
+            local cargorun = Terminal:new({
+                cmd = "cargo run && read -t 3 -n 1", hidden = true,
+                direction = "float" })
+            cargorun:toggle()
+        end
+
+        _cargorun_toggle()
+    else
+        vim.cmd("!\"%\"")
     end
     --vim.cmd("so")
 end)
-
