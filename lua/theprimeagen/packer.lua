@@ -135,6 +135,11 @@ return require('packer').startup(function(use)
     }
 
     use "lukas-reineke/indent-blankline.nvim"
+    use 'mfussenegger/nvim-dap'
+    use 'jbyuki/one-small-step-for-vimkind'
+    use "folke/neodev.nvim"
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
     use({
         'rose-pine/neovim',
         as = 'rose-pine',

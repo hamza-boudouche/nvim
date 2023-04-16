@@ -46,9 +46,11 @@ vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/the
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "<leader><leader>", function()
+    vim.cmd("w")
+    vim.cmd("!chmod +x \"%\"")
     print(vim.bo.filetype)
     local type = vim.bo.filetype
-    if type == "lua" then vim.cmd("so")
+    if type == "lua" then vim.cmd("source")
     elseif type == "md" then vim.cmd("MarkdownPreview")
     else vim.cmd("!\"%\"")
     end

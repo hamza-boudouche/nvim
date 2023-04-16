@@ -21,3 +21,14 @@ vim.defer_fn(function()
     vim.cmd('highlight GitSignsChange guibg=NONE')
     vim.cmd('highlight GitSignsAdd guibg=NONE')
 end, 100)
+
+
+-- useful for writing lua nvim plugins
+
+-- inspect some variable
+P = function (v)
+   print(vim.inspect(v))
+   return v
+end
+
+

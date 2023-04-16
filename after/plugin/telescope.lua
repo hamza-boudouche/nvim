@@ -26,3 +26,5 @@ end, { noremap = true, silent = true })
 
 -- this still doesn't work for some reason
 -- vim.keymap.set('n', '<leader>fl', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
+
+vim.keymap.set('n', '<leader>?', ':Telescope keymaps<CR>')
