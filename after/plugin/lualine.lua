@@ -6,7 +6,7 @@ local lualine = require('lualine')
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-    bg       = '#202328',
+    bg       = '#222200',
     fg       = '#bbc2cf',
     yellow   = '#ECBE7B',
     cyan     = '#008080',
@@ -122,10 +122,12 @@ ins_left {
 }
 
 ins_left {
-    -- filesize component
-    'filesize',
-    cond = conditions.buffer_not_empty,
+    'branch',
+    icon = '',
+    color = { fg = colors.violet, gui = 'bold' },
 }
+
+
 
 ins_left {
     'filename',
@@ -193,14 +195,14 @@ ins_right {
 }
 
 ins_right {
-    require('auto-session-library').current_session_name,
+    require('auto-session.lib').current_session_name,
     color = { fg = colors.cyan }
 }
 
 ins_right {
-    'branch',
-    icon = '',
-    color = { fg = colors.violet, gui = 'bold' },
+    -- filesize component
+    'filesize',
+    cond = conditions.buffer_not_empty,
 }
 
 ins_right {
@@ -220,7 +222,7 @@ ins_right {
         return '▊'
     end,
     color = { fg = colors.blue },
-    padding = { left = 1 },
+    padding = { left = 0 },
 }
 
 -- Now don't forget to initialize lualine

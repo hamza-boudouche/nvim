@@ -139,7 +139,29 @@ return require('packer').startup(function(use)
     use 'jbyuki/one-small-step-for-vimkind'
     use "folke/neodev.nvim"
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+
+    use({
+        "Pocco81/auto-save.nvim",
+        config = function()
+            require("auto-save").setup {
+                condition = function(buf)
+                    local fn = vim.fn
+                    local utils = require("auto-save.utils.data")
+                    local fileType = vim.bo.filetype
+
+                    if
+                        fn.getbufvar(buf, "&modifiable") == 1 and
+                        utils.not_in(fn.getbufvar(buf, "&filetype"), {}) and
+                        (fileType == "rust" or fileType == "lua") then
+                        return true -- met condition(s), can save
+                    end
+                    return false -- can't save
+                end,
+            }
+        end,
+    })
+
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
