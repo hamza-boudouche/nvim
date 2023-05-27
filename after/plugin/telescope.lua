@@ -28,3 +28,4 @@ end, { noremap = true, silent = true })
 -- vim.keymap.set('n', '<leader>fl', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 
 vim.keymap.set('n', '<leader>?', ':Telescope keymaps<CR>')
+vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>')
